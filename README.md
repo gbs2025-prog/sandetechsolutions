@@ -82,9 +82,24 @@
             "Product 1": 150,
             "Product 2": 200,
             "Product 3": 300,
+            "School System": 400,
+            "Hospital System": 500,
+            "Pharmacy System": 450,
+            "Stock Inventory System": 350,
+            "iPhones Available": 1000,
+            "Pouches": 50,
+            "Headsets": 100,
+            "Tendai Sande Books": 250,
+            "Beats": 500,
             "Service 1": 250,
             "Service 2": 350,
-            "Service 3": 500
+            "Service 3": 500,
+            "Auditing": 400,
+            "Tax Payments": 300,
+            "Phone or Computer Screen Replacement": 200,
+            "Phone and Computer Charging": 50,
+            "Barbing": 100,
+            "Computer Lessons": 150
         };
 
         function updatePrice() {
@@ -134,14 +149,26 @@
             <option value="Product 1">Product 1 - Description</option>
             <option value="Product 2">Product 2 - Description</option>
             <option value="Product 3">Product 3 - Description</option>
+            <option value="School System">School Management System</option>
+            <option value="Hospital System">Hospital Management System</option>
+            <option value="Pharmacy System">Pharmacy Management System</option>
+            <option value="Stock Inventory System">Stock Inventory Management System</option>
+            <option value="iPhones Available">All iPhones Available</option>
+            <option value="Pouches">Pouches</option>
+            <option value="Headsets">Headsets</option>
+            <option value="Tendai Sande Books">Tendai Sande Books</option>
+            <option value="Beats">Beats</option>
         </select>
         
         <label for="service">Choose a service:</label>
         <select id="service" onchange="updatePrice()">
             <option value="none">-- Select Service --</option>
-            <option value="Service 1">Service 1 - Description</option>
-            <option value="Service 2">Service 2 - Description</option>
-            <option value="Service 3">Service 3 - Description</option>
+            <option value="Auditing">Auditing</option>
+            <option value="Tax Payments">Tax Payments</option>
+            <option value="Phone or Computer Screen Replacement">Phone/Computer Screen Replacement</option>
+            <option value="Phone and Computer Charging">Phone/Computer Charging</option>
+            <option value="Barbing">Barbing</option>
+            <option value="Computer Lessons">Computer Lessons</option>
         </select>
         
         <h3 id="price" style="color: yellow;"></h3>
@@ -157,12 +184,12 @@
     <div id="newsTicker">
         <span id="newsContent">New products and services coming soon! Stay tuned for updates!</span>
     </div>
-<div class="bio">
-    
-    <h2>Who is Sande Tendai?</h2>
-    <img src="tendaisandesite.jpeg" style="max-width: 1000px; border-radius: 100px;">
-    <p>Sande Tendai is a visionary entrepreneur and technology enthusiast dedicated to providing innovative tech solutions tailored to modern business needs. With years of experience in the tech industry, Sande specializes in cutting-edge digital solutions, helping businesses transform and thrive in the digital age. Passionate about innovation, technology, and Africa’s growing digital economy, Sande is committed to bridging the gap between technology and business efficiency.</p>
-</div>
+
+    <div class="bio">
+        <h2>Who is Sande Tendai?</h2>
+        <img src="tendaisandesite.jpeg" style="max-width: 1000px; border-radius: 100px;">
+        <p>Sande Tendai is a visionary entrepreneur and technology enthusiast dedicated to providing innovative tech solutions tailored to modern business needs. With years of experience in the tech industry, Sande specializes in cutting-edge digital solutions, helping businesses transform and thrive in the digital age. Passionate about innovation, technology, and Africa’s growing digital economy, Sande is committed to bridging the gap between technology and business efficiency.</p>
+    </div>
 
     <footer>
         <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
