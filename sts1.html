@@ -40,6 +40,7 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        /* News Ticker Styles */
         #newsTicker {
             width: 100%;
             overflow: hidden;
@@ -52,13 +53,15 @@
             bottom: 0;
             left: 0;
         }
+        #newsContent {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: scrollText 10s linear infinite;
+        }
         @keyframes scrollText {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
-        }
-        #newsContent {
-            display: inline-block;
-            animation: scrollText 10s linear infinite;
         }
     </style>
     <script>
@@ -83,6 +86,23 @@
             document.getElementById("confirmationMessage").innerText = "Receipt generated for " + selectedItem;
             document.getElementById("confirmationMessage").style.display = "block";
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let newsTicker = document.getElementById("newsContent");
+            newsTicker.innerHTML = `
+                🚀 New products and services coming soon! Stay tuned for updates! &nbsp;&nbsp;
+                📞 Contact Us at: 0974021114 / 0775506831 / 0961286151 / 0966625837 for all your tech needs! &nbsp;&nbsp;
+                🚗 We are located in Lusaka, Chazanga area, along Chalo Bantu Road. Visit us today! &nbsp;&nbsp;
+                🎮 Love gaming? Visit us for the best gaming experience in town! &nbsp;&nbsp;
+                💈 Need a fresh cut? Come for top-notch barbing services at affordable prices! &nbsp;&nbsp;
+                📱 Looking for phone repairs, sales, or accessories? Contact us now! &nbsp;&nbsp;
+                ⚡ Speed up your tech with our expert services, from phone repairs to computer lessons! &nbsp;&nbsp;
+                🎮 Gaming, barbing, repairs, and more! We’ve got it all! Visit us in Chazanga! &nbsp;&nbsp;
+                🚨 For the best tech services and gaming experiences in Lusaka, contact us today! &nbsp;&nbsp;
+                💼 We offer: Tech Support, Barbing, Gaming, and more at affordable rates! &nbsp;&nbsp;
+                📞 Call us today at 0974021114/0775506831/0961286151/0966625837 for all your needs! &nbsp;&nbsp;
+            `;
+        });
     </script>
 </head>
 <body>
@@ -114,16 +134,26 @@
         <div id="confirmationMessage"></div>
     </div>
 
-    <!-- News Ticker for Advertising -->
-     <div id="newsTicker">
-        <span id="newsContent">New products and services coming soon! Stay tuned for updates!</span>
+    <!-- News Ticker Section -->
+    <div id="newsTicker">
+        <span id="newsContent">
+📞 Contact Us at: 0974021114 / 0775506831 / 0961286151 / 0966625837 for all your tech needs! &nbsp;&nbsp;
+            🚗 We are located in Lusaka, Chazanga area, along Chalo Bantu Road. Visit us today! &nbsp;&nbsp;
+            🎮 Love gaming? Visit us for the best gaming experience in town! &nbsp;&nbsp;
+            💈 Need a fresh cut? Come for top-notch barbing services at affordable prices! &nbsp;&nbsp;
+            📱 Looking for phone repairs, sales, or accessories? Contact us now! &nbsp;&nbsp;
+            ⚡ Speed up your tech with our expert services, from phone repairs to computer lessons! &nbsp;&nbsp;
+            🎮 Gaming, barbing, repairs, and more! We’ve got it all! Visit us in Chazanga! &nbsp;&nbsp;
+            🚨 For the best tech services and gaming experiences in Lusaka, contact us today! &nbsp;&nbsp;
+            💼 We offer: Tech Support, Barbing, Gaming, and more at affordable rates! &nbsp;&nbsp;
+            📞 Call us today at 0974021114/0775506831/0961286151/0966625837 for all your needs! &nbsp;&nbsp;</span>
     </div>
 
     <div class="bio">
         <h2>Who is Sande Tendai?</h2>
         <p>Sande Tendai is a visionary entrepreneur dedicated to providing innovative tech solutions.</p>
     </div>
-
+    
     <li><a href="sts2.html">Phone Menu</a></li>
     
     <footer>
@@ -131,3 +161,4 @@
     </footer>
 </body>
 </html>
+
