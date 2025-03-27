@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sande Tech Solutions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             background: linear-gradient(to right, black, purple);
@@ -13,16 +14,10 @@
             margin: 0;
             padding: 0;
         }
-        header {
+        .content, .bio {
             padding: 20px;
         }
-        img {
-            max-width: 300px;
-        }
-        .content {
-            padding: 50px;
-        }
-        select, button, textarea {
+        select, button, textarea, input {
             padding: 10px;
             margin: 10px;
             font-size: 16px;
@@ -36,17 +31,6 @@
         }
         button:hover {
             background: lightgray;
-        }
-        .bio {
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin: 20px;
-        }
-        footer {
-            padding: 20px;
-            margin-top: 50px;
-            background: rgba(255, 255, 255, 0.2);
         }
         #confirmationMessage {
             display: none;
@@ -68,96 +52,71 @@
             bottom: 0;
             left: 0;
         }
-        @keyframes scrollText {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-        #newsContent {
-            display: inline-block;
-            animation: scrollText 10s linear infinite;
-        }
     </style>
     <script>
-        const prices = {
-            "Product 1": 150,
-            "Product 2": 200,
-            "Product 3": 300,
-            "Service 1": 250,
-            "Service 2": 350,
-            "Service 3": 500
-        };
-
-        function updatePrice() {
+        function generateReceipt() {
+            const { jsPDF } = window.jspdf;
+            let doc = new jsPDF();
             let product = document.getElementById("product").value;
             let service = document.getElementById("service").value;
-            let priceDisplay = document.getElementById("price");
+            let email = document.getElementById("email").value;
+            let selectedItem = product !== "none" ? product : service;
             
-            if (product !== "none") {
-                priceDisplay.innerText = "Price: " + prices[product] + " ZMW";
-                document.getElementById("service").value = "none";
-            } else if (service !== "none") {
-                priceDisplay.innerText = "Price: " + prices[service] + " ZMW";
-                document.getElementById("product").value = "none";
-            } else {
-                priceDisplay.innerText = "";
-            }
-        }
-
-        function purchase() {
-            let product = document.getElementById("product").value;
-            let service = document.getElementById("service").value;
-            let confirmationMessage = document.getElementById("confirmationMessage");
-            
-            if (product === "none" && service === "none") {
-                alert("Please select a product or service before making a purchase.");
+            if (selectedItem === "none") {
+                alert("Please select a product or service before proceeding.");
                 return;
             }
-
-            let selectedItem = product !== "none" ? product : service;
-            confirmationMessage.innerText = "Thank you for purchasing " + selectedItem + "!";
-            confirmationMessage.style.display = "block";
+            
+            doc.text("Sande Tech Solutions Receipt", 10, 10);
+            doc.text("Product/Service: " + selectedItem, 10, 20);
+            doc.text("Thank you for your purchase!", 10, 30);
+            
+            doc.save("receipt.pdf");
+            document.getElementById("confirmationMessage").innerText = "Receipt generated for " + selectedItem;
+            document.getElementById("confirmationMessage").style.display = "block";
         }
     </script>
 </head>
 <body>
     <header>
-        <img src="DALL·E_2025-03-25_11.48.20.webp" alt="Sande Tech Solutions Logo">
         <h1>Welcome to Sande Tech Solutions</h1>
     </header>
     
     <div class="content">
         <h2>Select Your Product or Service</h2>
-        
         <label for="product">Choose a product:</label>
-        <select id="product" onchange="updatePrice()">
+        <select id="product">
             <option value="none">-- Select Product --</option>
-            <option value="Product 1">Product 1 - Description</option>
-            <option value="Product 2">Product 2 - Description</option>
-            <option value="Product 3">Product 3 - Description</option>
+            <option value="School System">School Management System</option>
+            <option value="Hospital System">Hospital Management System</option>
+            <option value="Stock Inventory System">Stock Inventory System</option>
         </select>
-        
         <label for="service">Choose a service:</label>
-        <select id="service" onchange="updatePrice()">
+        <select id="service">
             <option value="none">-- Select Service --</option>
-            <option value="Service 1">Service 1 - Description</option>
-            <option value="Service 2">Service 2 - Description</option>
-            <option value="Service 3">Service 3 - Description</option>
+            <option value="Auditing">Auditing</option>
+            <option value="Tax Payments">Tax Payments</option>
+            <option value="Computer Lessons">Computer Lessons</option>
         </select>
-        
-        <h3 id="price" style="color: yellow;"></h3>
-        
-        <h2>Leave a Suggestion or Comment</h2>
-        <textarea id="comment" rows="4" cols="50" placeholder="Enter your suggestion or feedback here..."></textarea>
-        
-        <button onclick="purchase()">Make Purchase</button>
-        
+        <br>
+        <label for="email">Enter your Email:</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        <br>
+        <button onclick="generateReceipt()">Generate Receipt</button>
         <div id="confirmationMessage"></div>
     </div>
-
+    
+    <div class="bio">
+        <h2>Who is Sande Tendai?</h2>
+        <p>Sande Tendai is a visionary entrepreneur dedicated to providing innovative tech solutions.</p>
+    </div>
+    
     <div id="newsTicker">
-        <span id="newsContent">New products and services coming soon! Stay tuned for updates!</span>
+        <span>New products and services coming soon! Stay tuned for updates!</span>
     </div>
 
+    <li><a href="sts2.html">Phone Menu</a></li>
+    
     <footer>
         <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
     </footer>
