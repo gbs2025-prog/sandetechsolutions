@@ -190,7 +190,12 @@
         <img src="tendaisandesite.jpeg" style="max-width: 1000px; border-radius: 100px;">
         <p>Sande Tendai is a visionary entrepreneur and technology enthusiast dedicated to providing innovative tech solutions tailored to modern business needs. With years of experience in the tech industry, Sande specializes in cutting-edge digital solutions, helping businesses transform and thrive in the digital age. Passionate about innovation, technology, and Africa’s growing digital economy, Sande is committed to bridging the gap between technology and business efficiency.</p>
     </div>
+    
 
+        
+            <li><a href="sts22025.html"> link to phone Services</a></li>
+           
+    
     <footer>
         <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
     </footer>
