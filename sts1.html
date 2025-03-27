@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sande Tech Solutions</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             background: linear-gradient(to right, black, purple);
@@ -14,10 +13,16 @@
             margin: 0;
             padding: 0;
         }
-        .content, .bio {
+        header {
             padding: 20px;
         }
-        select, button, textarea, input {
+        img {
+            max-width: 300px;
+        }
+        .content {
+            padding: 50px;
+        }
+        select, button, textarea {
             padding: 10px;
             margin: 10px;
             font-size: 16px;
@@ -32,6 +37,17 @@
         button:hover {
             background: lightgray;
         }
+        .bio {
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+        footer {
+            padding: 20px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.2);
+        }
         #confirmationMessage {
             display: none;
             background: green;
@@ -40,7 +56,6 @@
             border-radius: 5px;
             margin-top: 20px;
         }
-        /* News Ticker Styles */
         #newsTicker {
             width: 100%;
             overflow: hidden;
@@ -53,78 +68,94 @@
             bottom: 0;
             left: 0;
         }
-        #newsContent {
-            display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            animation: scrollText 10s linear infinite;
-        }
         @keyframes scrollText {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
         }
+        #newsContent {
+            display: inline-block;
+            animation: scrollText 10s linear infinite;
+        }
     </style>
     <script>
-        function generateReceipt() {
-            const { jsPDF } = window.jspdf;
-            let doc = new jsPDF();
+        const prices = {
+            "Product 1": 150,
+            "Product 2": 200,
+            "Product 3": 300,
+            "Service 1": 250,
+            "Service 2": 350,
+            "Service 3": 500
+        };
+
+        function updatePrice() {
             let product = document.getElementById("product").value;
             let service = document.getElementById("service").value;
-            let email = document.getElementById("email").value;
-            let selectedItem = product !== "none" ? product : service;
+            let priceDisplay = document.getElementById("price");
             
-            if (selectedItem === "none") {
-                alert("Please select a product or service before proceeding.");
-                return;
+            if (product !== "none") {
+                priceDisplay.innerText = "Price: " + prices[product] + " ZMW";
+                document.getElementById("service").value = "none";
+            } else if (service !== "none") {
+                priceDisplay.innerText = "Price: " + prices[service] + " ZMW";
+                document.getElementById("product").value = "none";
+            } else {
+                priceDisplay.innerText = "";
             }
-            
-            doc.text("Sande Tech Solutions Receipt", 10, 10);
-            doc.text("Product/Service: " + selectedItem, 10, 20);
-            doc.text("Thank you for your purchase!", 10, 30);
-            
-            doc.save("receipt.pdf");
-            document.getElementById("confirmationMessage").innerText = "Receipt generated for " + selectedItem;
-            document.getElementById("confirmationMessage").style.display = "block";
         }
 
-            `;
-        });
+        function purchase() {
+            let product = document.getElementById("product").value;
+            let service = document.getElementById("service").value;
+            let confirmationMessage = document.getElementById("confirmationMessage");
+            
+            if (product === "none" && service === "none") {
+                alert("Please select a product or service before making a purchase.");
+                return;
+            }
+
+            let selectedItem = product !== "none" ? product : service;
+            confirmationMessage.innerText = "Thank you for purchasing " + selectedItem + "!";
+            confirmationMessage.style.display = "block";
+        }
     </script>
 </head>
 <body>
     <header>
+        <img src="DALL·E_2025-03-25_11.48.20.webp" alt="Sande Tech Solutions Logo">
         <h1>Welcome to Sande Tech Solutions</h1>
     </header>
     
     <div class="content">
         <h2>Select Your Product or Service</h2>
+        
         <label for="product">Choose a product:</label>
-        <select id="product">
+        <select id="product" onchange="updatePrice()">
             <option value="none">-- Select Product --</option>
-            <option value="School System">School Management System</option>
-            <option value="Hospital System">Hospital Management System</option>
-            <option value="Stock Inventory System">Stock Inventory System</option>
+            <option value="Product 1">Product 1 - Description</option>
+            <option value="Product 2">Product 2 - Description</option>
+            <option value="Product 3">Product 3 - Description</option>
         </select>
+        
         <label for="service">Choose a service:</label>
-        <select id="service">
+        <select id="service" onchange="updatePrice()">
             <option value="none">-- Select Service --</option>
-            <option value="Auditing">Auditing</option>
-            <option value="Tax Payments">Tax Payments</option>
-            <option value="Computer Lessons">Computer Lessons</option>
+            <option value="Service 1">Service 1 - Description</option>
+            <option value="Service 2">Service 2 - Description</option>
+            <option value="Service 3">Service 3 - Description</option>
         </select>
-        <br>
-        <label for="email">Enter your Email:</label>
-        <input type="email" id="email" placeholder="Enter your email">
-        <br>
-        <button onclick="generateReceipt()">Generate Receipt</button>
+        
+        <h3 id="price" style="color: yellow;"></h3>
+        
+        <h2>Leave a Suggestion or Comment</h2>
+        <textarea id="comment" rows="4" cols="50" placeholder="Enter your suggestion or feedback here..."></textarea>
+        
+        <button onclick="purchase()">Make Purchase</button>
+        
         <div id="confirmationMessage"></div>
     </div>
 
-    
-    <!-- News Ticker for Advertising -->
     <div id="newsTicker">
-        <span id="newsContent">
-            📞 Contact Us at: 0974021114 / 0775506831 / 0961286151 / 0966625837 for all your tech needs! &nbsp;&nbsp;
+        <span id="newsContent">     📞 Contact Us at: 0974021114 / 0775506831 / 0961286151 / 0966625837 for all your tech needs! &nbsp;&nbsp;
             🚗 We are located in Lusaka, Chazanga area, along Chalo Bantu Road. Visit us today! &nbsp;&nbsp;
             🎮 Love gaming? Visit us for the best gaming experience in town! &nbsp;&nbsp;
             💈 Need a fresh cut? Come for top-notch barbing services at affordable prices! &nbsp;&nbsp;
@@ -133,20 +164,11 @@
             🎮 Gaming, barbing, repairs, and more! We’ve got it all! Visit us in Chazanga! &nbsp;&nbsp;
             🚨 For the best tech services and gaming experiences in Lusaka, contact us today! &nbsp;&nbsp;
             💼 We offer: Tech Support, Barbing, Gaming, and more at affordable rates! &nbsp;&nbsp;
-            📞 Call us today at 0974021114/0775506831/0961286151/0966625837 for all your needs! &nbsp;&nbsp;
-        </span>
+            📞 Call us today at 0974021114/0775506831/0961286151/0966625837 for all your needs! &nbsp;&nbsp;</span>
     </div>
 
-    <div class="bio">
-        <h2>Who is Sande Tendai?</h2>
-        <p>Sande Tendai is a visionary entrepreneur dedicated to providing innovative tech solutions.</p>
-    </div>
-    
-    <li><a href="sts2.html">Phone Menu</a></li>
-    
     <footer>
         <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
     </footer>
 </body>
 </html>
-
