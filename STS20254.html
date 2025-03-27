@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sande Tech Solutions - Payment</title>
+    <style>
+        body {
+            background: linear-gradient(to right, black, purple);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 20px;
+        }
+        img {
+            max-width: 300px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            font-size: 16px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background: white;
+            color: black;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: lightgray;
+        }
+        footer {
+            padding: 20px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        #mobileMoneySection, #visaPaymentSection {
+            margin-top: 30px;
+        }
+        #card-errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="sts.png.webp" alt="Sande Tech Solutions Logo">
+        <h1>Payment Options</h1>
+    </header>
+
+    <div class="container">
+        <h2>Choose Your Payment Method</h2>
+
+        <!-- Mobile Money Payment Option -->
+        <div id="mobileMoneySection">
+            <h3>Mobile Money Payment</h3>
+            <p>Use Airtel, MTN Mobile Money, or Zamcash</p>
+            <form id="mobileMoneyForm">
+                <div class="form-group">
+                    <label for="mobileNumber">Enter Mobile Number</label>
+                    <input type="text" id="mobileNumber" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNetwork">Select Mobile Network</label>
+                    <select id="mobileNetwork" required>
+                        <option value="Airtel">Airtel</option>
+                        <option value="MTN">MTN</option>
+                        <option value="Zamcash">Zamcash</option>
+                    </select>
+                </div>
+                <button type="button" id="mobilePayButton">Pay via Mobile Money</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <!-- Visa Card Payment Option -->
+        <div id="visaPaymentSection">
+            <h3>Visa Card Payment</h3>
+            <p>Pay securely with your Visa card</p>
+            <form id="visaPaymentForm">
+                <div class="form-group">
+                    <label for="card-element">Card Information</label>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+                    <div id="card-errors" role="alert"></div>
+                </div>
+                <button type="button" id="payWithVisaButton">Pay via Visa Card</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
+    </footer>
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        // Stripe Setup
+        const stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');  // Replace with your Stripe public key
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
+
+        // Mobile Money Payment Handler
+        document.getElementById('mobilePayButton').addEventListener('click', function() {
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const mobileNetwork = document.getElementById('mobileNetwork').value;
+
+            if (!mobileNumber || !mobileNetwork) {
+                alert('Please enter your mobile number and select a network.');
+                return;
+            }
+
+            alert('You will be charged through ' + mobileNetwork + ' using the number: ' + mobileNumber + '. Follow the instructions to complete the payment.');
+        });
+
+        // Visa Card Payment Handler
+        document.getElementById('payWithVisaButton').addEventListener('click', function() {
+            stripe.createPaymentMethod('card', card).then(function(result) {
+                if (result.error) {
+                    // Display error to user
+                    document.getElementById('card-errors').textContent = result.error.message;
+                } else {
+                    // Call your server to create the Payment Intent
+                    fetch('/create-payment-intent', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            paymentMethodId: result.paymentMethod.id,
+                        }),
+                    }).then(function(response) {
+                        return response.json();
+                    }).then(function(paymentResult) {
+                        if (paymentResult.error) {
+                            document.getElementById('card-errors').textContent = paymentResult.error;
+                        } else {
+                            alert('Payment successful!');
+                        }
+                    }).catch(function(error) {
+                        document.getElementById('card-errors').textContent = 'Payment failed: ' + error.message;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
