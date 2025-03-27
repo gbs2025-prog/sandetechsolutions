@@ -115,7 +115,9 @@
     <div id="newsTicker">
         <span id="newsContent"></span>
     </div>
+    
 <li><a href="sts2.html">Phone Menu</a></li>
+
     <footer>
         <p>&copy; 2025 Sande Tech Solutions. All rights reserved.</p>
     </footer>
