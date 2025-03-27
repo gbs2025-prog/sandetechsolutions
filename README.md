@@ -121,7 +121,7 @@
 </head>
 <body>
     <header>
-        <img src="sts.png" alt="Sande Tech Solutions Logo">
+        <img src="sts.png.webp" alt="Sande Tech Solutions Logo">
         <h1>Welcome to Sande Tech Solutions</h1>
     </header>
     
@@ -160,7 +160,7 @@
 <div class="bio">
     
     <h2>Who is Sande Tendai?</h2>
-    <img src="tendaisandesite.jpeg" style="max-width: 200px; border-radius: 10px;">
+    <img src="tendaisandesite.jpeg" style="max-width: 1000px; border-radius: 100px;">
     <p>Sande Tendai is a visionary entrepreneur and technology enthusiast dedicated to providing innovative tech solutions tailored to modern business needs. With years of experience in the tech industry, Sande specializes in cutting-edge digital solutions, helping businesses transform and thrive in the digital age. Passionate about innovation, technology, and Africa’s growing digital economy, Sande is committed to bridging the gap between technology and business efficiency.</p>
 </div>
 
